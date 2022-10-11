@@ -13,15 +13,15 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false,
       },
-      name: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      dishSummary: {
+      summary: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      healthFoodScore: {
+      healthScore: {
         type: DataTypes.STRING,
         allowNull: true,
       },
