@@ -1,10 +1,12 @@
 const { response, request } = require('express');
+const { getRecipesByNameOfDbAndApi } = require('../helpers');
 
-const getRecipesByName = (req = request, res = response) => {
+const getRecipesByName = async (req = request, res = response) => {
   const { name } = req.query;
+  if (!name) res.status(400).json({ msg: `Name is not defined!` });
   try {
-    // get a la api
-    res.status(200).json(name);
+    const recipe = await getRecipesByNameOfDbAndApi(name);
+    res.status(200).json(recipe);
   } catch (error) {
     res.status(404).send(error.message);
   }
