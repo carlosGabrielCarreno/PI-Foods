@@ -1,5 +1,5 @@
-const { getRecipesByNameOfDbAndApi } = require('./getRecipesByNameOfDbAndApi');
+const { getRecipesByNameOfDb } = require('./getRecipesByNameOfDb');
 
 module.exports = {
-  getRecipesByNameOfDbAndApi,
+  getRecipesByNameOfDb,
 };

@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, STRING } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -11,8 +11,8 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false,
       },
-      name: {
-        type: DataTypes.STRING,
+      diets: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
     },

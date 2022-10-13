@@ -1,14 +1,11 @@
 const { Recipe, TypeOfDiet } = require('../db');
 
-const getRecipesByNameOfDb = async () => {
-  try {
-    const recipes = Recipe.findAll({
-      attributes: ['id', 'title', 'summary'],
-      include: TypeOfDiet,
-    });
-  } catch (error) {
-    return new Error(error);
-  }
+const getRecipesByNameOfDb = async (name) => {
+  const recipes = await Recipe.findAll({});
+
+  return data;
 };
 
-module.exports = { getRecipesByNameOfDb };
+module.exports = {
+  getRecipesByNameOfDb,
+};

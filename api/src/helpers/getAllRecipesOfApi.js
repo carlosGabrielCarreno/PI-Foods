@@ -4,9 +4,12 @@ const { getRecipesByApi } = require('./getRecipesByApi');
 const getAllRecipesOfApi = async (colletionRecipes, numberPage = 1) => {
   const newRecipes = await getRecipesByApi(numberPage);
   const recipes = newRecipes.map((recipe) => {
+    const stepsData = recipe.analyzedInstructions[0];
+
+    const { steps } = stepsData ? stepsData : { steps: 'not steps' };
     // trabajar con analyzedInstructions...
     return {
-      id: recipe.id,
+      /* id: recipe.id, */
       title: recipe.title,
       image: recipe.image,
       healthScore: recipe.healthScore,
@@ -15,7 +18,7 @@ const getAllRecipesOfApi = async (colletionRecipes, numberPage = 1) => {
       glutenFree: !recipe.glutenFree ? false : true,
       summary: recipe.summary,
       diets: recipe.diets ? recipe.diets : null,
-      analyzedInstructions: recipe.analyzedInstructions,
+      analyzedInstructions: JSON.stringify(steps),
     };
   });
 

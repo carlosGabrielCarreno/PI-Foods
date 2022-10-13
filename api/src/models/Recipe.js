@@ -17,16 +17,32 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      summary: {
+      image: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      vegetarian: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      vegan: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      glutenFree: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      summary: {
+        type: DataTypes.STRING(5000),
         allowNull: false,
       },
       healthScore: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      stepByStep: {
-        type: DataTypes.STRING,
+      analyzedInstructions: {
+        type: DataTypes.STRING(10000),
         allowNull: true,
       },
     },
