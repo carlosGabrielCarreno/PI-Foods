@@ -1,5 +1,6 @@
 const { response, request } = require('express');
 const { getRecipesByNameOfDb } = require('../helpers');
+const { getRecipeDetailById } = require('../helpers/getRecipeDetailById');
 
 const getRecipesByName = async (req = request, res = response) => {
   const { name } = req.query;
@@ -8,17 +9,25 @@ const getRecipesByName = async (req = request, res = response) => {
     const recipe = await getRecipesByNameOfDb(name);
     res.status(200).json(recipe);
   } catch (error) {
-    res.status(404).send(error.message);
+    res.status(404).send(error);
   }
 };
 
-const getDetailOfRecipe = (req = request, res = response) => {
+const getDetailOfRecipe = async (req = request, res = response) => {
   const { id } = req.params;
-  try {
-    // get a la api
-    res.status(200).json(id);
-  } catch (error) {
-    res.status(404).send(error.message);
+  if (!id) {
+    res.status(404).send('id is undefined');
+  } else {
+    try {
+      const recipe = await getRecipeDetailById(id);
+      if (recipe) {
+        res.status(200).json(recipe);
+      } else {
+        throw new Error(recipe);
+      }
+    } catch (error) {
+      res.status(404).send(error.message);
+    }
   }
 };
 

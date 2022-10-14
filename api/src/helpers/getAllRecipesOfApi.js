@@ -1,15 +1,14 @@
-const { accumulationArray } = require('./accumulationArray');
 const { getRecipesByApi } = require('./getRecipesByApi');
 //this function get 100 recipes:
-const getAllRecipesOfApi = async (colletionRecipes, numberPage = 1) => {
-  const newRecipes = await getRecipesByApi(numberPage);
+const getAllRecipesOfApi = async () => {
+  const newRecipes = await getRecipesByApi();
   const recipes = newRecipes.map((recipe) => {
     const stepsData = recipe.analyzedInstructions[0];
-
     const { steps } = stepsData ? stepsData : { steps: 'not steps' };
-    // trabajar con analyzedInstructions...
     return {
-      /* id: recipe.id, */
+      /* id: recipe.id.toString(), */
+      cuisines: recipe.cuisines.length ? recipe.cuisines : ['not cuisines'],
+      dishTypes: recipe.dishTypes.length ? recipe.dishTypes : ['not dishTypes'],
       title: recipe.title,
       image: recipe.image,
       healthScore: recipe.healthScore,
@@ -21,13 +20,8 @@ const getAllRecipesOfApi = async (colletionRecipes, numberPage = 1) => {
       analyzedInstructions: JSON.stringify(steps),
     };
   });
-
-  colletionRecipes = accumulationArray(colletionRecipes, recipes);
-  numberPage++;
-  console.log(colletionRecipes.length);
-  return numberPage > 14
-    ? colletionRecipes
-    : getAllRecipesOfApi(colletionRecipes, numberPage);
+  console.table(recipes);
+  return recipes;
 };
 
 module.exports = {

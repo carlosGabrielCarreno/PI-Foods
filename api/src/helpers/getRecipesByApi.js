@@ -2,9 +2,9 @@ const axios = require('axios');
 
 const path = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=';
 
-const getRecipesByApi = async (numberPage) => {
+const getRecipesByApi = async () => {
   try {
-    const url = `${path}${process.env.API_KEY}&number=${numberPage}&addRecipeInformation=true`;
+    const url = `${path}${process.env.API_KEY}&number=100&addRecipeInformation=true`;
     const {
       data: { results },
     } = await axios.get(url);

@@ -16,6 +16,7 @@ module.exports = (sequelize) => {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       image: {
         type: DataTypes.STRING,
@@ -44,6 +45,14 @@ module.exports = (sequelize) => {
       analyzedInstructions: {
         type: DataTypes.STRING(10000),
         allowNull: true,
+      },
+      cuisines: {
+        type: DataTypes.ARRAY(DataTypes.STRING(1000)),
+        allowNull: false,
+      },
+      dishTypes: {
+        type: DataTypes.ARRAY(DataTypes.STRING(1000)),
+        allowNull: false,
       },
     },
     { timestamps: false }
