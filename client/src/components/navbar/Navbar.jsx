@@ -41,7 +41,7 @@ const ContainerTitle = styled.div`
 export const Navbar = () => {
   return (
     <NavContainer>
-      <LogoContainer>
+      <LogoContainer to="/">
         <LocalDiningIcon />
       </LogoContainer>
       <ContainerTitle>

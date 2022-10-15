@@ -6,6 +6,7 @@ export const getRecipes = () => {
     const url = 'http://localhost:3001/allRecipes';
     const response = await fetch(url);
     const data = await response.json();
+    //console.log('soy data', data);
     dispatch({ type: SET_RECIPES, payload: data });
     dispatch({ type: SET_RECIPES_LOADING, payload: false });
   };
