@@ -1,7 +1,7 @@
 import { SET_RECIPES } from '../actions/actionsTypes';
 
 const initialState = {
-  recipes: [],
+  allRecipes: [],
 };
 
 const recipes = (state = initialState, { type, payload }) => {
@@ -9,7 +9,7 @@ const recipes = (state = initialState, { type, payload }) => {
     case SET_RECIPES:
       return {
         ...state,
-        recipes: [...state.recipes, payload],
+        allRecipes: state.allRecipespayload.concat(payload),
       };
     default:
       return state;
