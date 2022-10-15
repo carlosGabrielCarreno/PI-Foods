@@ -1,11 +1,18 @@
-import './App.css';
+import { GlobalStyle } from './GlobalStyle.styled';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { Home, Main } from './views';
+import './normalize.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1>Henry Food</h1>
-    </div>
+    <>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Route path="/" exact component={Home} />
+        <Route path="/allRecipes" exact component={Main} />
+      </BrowserRouter>
+    </>
   );
-}
+};
 
 export default App;
