@@ -36,6 +36,28 @@ const ValueItem = styled.a`
   }
 `;
 
+const Button = styled.button`
+  transition: all 600ms;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 5px;
+  font-weight: 600;
+  border: 0;
+  width: 3rem;
+  height: 2rem;
+  margin: 0 1rem;
+  position: relative;
+  background: linear-gradient(to right, #ffd160, #f8b525);
+  color: #111110;
+  :hover {
+    color: #f8b525;
+    background: transparent;
+    border: 1px solid #f8b525;
+    transform: scale(1.1);
+  }
+`;
+
 export const Pagination = (props) => {
   const { allRecipes, recipesPerPage, paginado } = props;
   let pageNumber = [];
@@ -49,12 +71,21 @@ export const Pagination = (props) => {
 
   return (
     <ContainerPagination>
-      {pageNumber &&
-        pageNumber.map((number, i) => (
-          <Item key={number + i}>
-            <ValueItem onClick={() => paginado(number)}>{number}</ValueItem>
-          </Item>
-        ))}
+      <Button onClick={() => paginado(!number ? number : number - 1)}>
+        Prev
+      </Button>
+      {pageNumber && (
+        <>
+          {pageNumber.map((number, i) => (
+            <Item key={number + i}>
+              <ValueItem onClick={() => paginado(number)}>{number}</ValueItem>
+            </Item>
+          ))}
+        </>
+      )}
+      <Button onClick={() => paginado(number > 11 ? number : number + 1)}>
+        Next
+      </Button>
     </ContainerPagination>
   );
 };

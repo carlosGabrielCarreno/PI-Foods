@@ -29,11 +29,13 @@ export const Cards = () => {
   const indexFirstRecipe = indexLastRecipe - recipesPerPage;
   const currentRecipes = allRecipes.slice(indexFirstRecipe, indexLastRecipe);
 
-  const curr = useMemo(() => dispatch(getRecipes()), [allRecipes]);
-
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const paginado = (numPage) => {
+    setCurrentPage(numPage);
   };
+
+  useEffect(() => {
+    dispatch(getRecipes());
+  }, [dispatch]);
 
   return (
     <>
