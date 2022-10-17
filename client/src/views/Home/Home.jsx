@@ -11,7 +11,7 @@ export const Home = () => {
     <HomeContainer>
       <ImageBackground />
       <Filler />
-      <Button to="/allRecipes">Get Started</Button>
+      <Button to="/recipes">Get Started</Button>
     </HomeContainer>
   );
 };

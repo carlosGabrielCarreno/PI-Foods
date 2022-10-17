@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { Card } from '../index';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo, useState } from 'react';
-import { getRecipes } from '../../store/actions';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import { Pagination } from '../pagination/Pagination';
 
 const ContainerCards = styled.div`

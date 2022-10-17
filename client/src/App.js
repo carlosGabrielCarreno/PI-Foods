@@ -24,8 +24,8 @@ const App = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Route path="/" exact component={Home} />
-        <Route path="/allRecipes" exact component={Main} />
-        <Route path="/allRecipes/detail" exact component={CardDetail} />
+        <Route path="/recipes" exact component={Main} />
+        <Route path="/recipes/:id" exact component={CardDetail} />
       </BrowserRouter>
     </>
   );

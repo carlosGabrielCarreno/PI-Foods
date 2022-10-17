@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const CardContainer = styled(Link)`
+const CardContainer = styled.div`
   border: 0;
   background-color: #1f1c1c;
   width: 100%;
@@ -51,13 +51,16 @@ const Diets = styled.h3`
 `;
 
 export const Card = (props) => {
-  const { image, title, typeOfDiets } = props;
+  const { image, title, typeOfDiets, id, history } = props;
   const diets = typeOfDiets[0]?.diets.length
     ? typeOfDiets[0].diets.join(' ')
     : 'Not diets';
-
+  const handleNavigate = (id) => {
+    console.log(`/recipes/${id}`);
+    history.push(`/recipes/4`);
+  };
   return (
-    <CardContainer to="/">
+    <CardContainer onClick={() => handleNavigate(4)}>
       <ImgCard src={image} alt={title} />
       <ContainerInfoCard>
         <Title>{title}</Title>
