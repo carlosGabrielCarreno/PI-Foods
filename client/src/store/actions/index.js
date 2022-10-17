@@ -1,4 +1,4 @@
-import { SET_RECIPES_LOADING, SET_RECIPES } from './actionsTypes';
+import { SET_RECIPES_LOADING, SET_RECIPES, GET_DIETS } from './actionsTypes';
 
 export const getRecipes = () => {
   return async (dispatch) => {
@@ -9,5 +9,15 @@ export const getRecipes = () => {
     //console.log('soy data', data);
     dispatch({ type: SET_RECIPES, payload: data });
     dispatch({ type: SET_RECIPES_LOADING, payload: false });
+  };
+};
+
+export const getDiets = () => {
+  return async (dispatch) => {
+    const url = '/recipes/diets';
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log('soy data', data);
+    dispatch({ type: GET_DIETS, payload: data });
   };
 };

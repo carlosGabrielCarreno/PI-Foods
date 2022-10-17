@@ -2,12 +2,11 @@ import styled from 'styled-components';
 
 const ContainerPagination = styled.div`
   /* border: solid red; */
-  display: grid;
-  gap: 1rem;
-  grid-auto-rows: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(1.7rem, 1fr));
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 50%;
+  gap: 1rem;
   margin: 1.5rem 0 1rem 0;
 `;
 
@@ -44,8 +43,8 @@ const Button = styled.button`
   border-radius: 5px;
   font-weight: 600;
   border: 0;
-  width: 3rem;
-  height: 2rem;
+  width: 100%;
+  height: 100%;
   margin: 0 1rem;
   position: relative;
   background: linear-gradient(to right, #ffd160, #f8b525);
@@ -62,7 +61,7 @@ export const Pagination = (props) => {
   const { allRecipes, recipesPerPage, paginado } = props;
   let pageNumber = [];
   for (
-    let index = 0;
+    let index = 1;
     index <= Math.ceil(allRecipes / recipesPerPage);
     index++
   ) {
@@ -71,7 +70,9 @@ export const Pagination = (props) => {
 
   return (
     <ContainerPagination>
-      <Button onClick={() => paginado(!number ? number : number - 1)}>
+      <Button
+        onClick={() => paginado((number) => (!number ? number : number - 1))}
+      >
         Prev
       </Button>
       {pageNumber && (
@@ -83,7 +84,9 @@ export const Pagination = (props) => {
           ))}
         </>
       )}
-      <Button onClick={() => paginado(number > 11 ? number : number + 1)}>
+      <Button
+        onClick={() => paginado((number) => (number > 11 ? 0 : number + 1))}
+      >
         Next
       </Button>
     </ContainerPagination>

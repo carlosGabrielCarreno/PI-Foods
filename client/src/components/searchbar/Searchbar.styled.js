@@ -8,6 +8,9 @@ const ContainerSearchBar = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  @media (min-width: 700px) {
+    width: 40%;
+  }
 `;
 
 const ContainerSearchInput = styled.div`

@@ -22,7 +22,6 @@ const ContainerCards = styled.div`
 export const Cards = () => {
   const { loading } = useSelector((state) => state.recipesLoading);
   const { allRecipes } = useSelector((state) => state.recipes);
-  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(10);
   const indexLastRecipe = currentPage * recipesPerPage;
@@ -32,10 +31,6 @@ export const Cards = () => {
   const paginado = (numPage) => {
     setCurrentPage(numPage);
   };
-
-  useEffect(() => {
-    dispatch(getRecipes());
-  }, [dispatch]);
 
   return (
     <>
