@@ -33,7 +33,7 @@ export const getDetailRecipe = (id) => {
     const url = `http://localhost:3001/${id}`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log('soy data', data);
+    /* console.log('soy data', data); */
     dispatch({ type: GET_DETAIL_RECIPE, payload: data });
     dispatch({ type: SET_RECIPES_LOADING, payload: false });
   };

@@ -1,5 +1,5 @@
 import { GlobalStyle } from './GlobalStyle.styled';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Home, Main } from './views';
 import './normalize.css';
 import { getDiets, getRecipes } from './store/actions';
@@ -22,11 +22,12 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
-        <Route path="/" exact component={Home} />
-        <Route path="/recipes" exact component={Main} />
-        <Route path="/recipes/:id" exact component={CardDetail} />
-      </BrowserRouter>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/recipes" element={<Main />} />
+        <Route path="/detail/:id" element={<CardDetail />} />
+      </Routes>
     </>
   );
 };
