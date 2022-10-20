@@ -4,6 +4,9 @@ import {
   SET_RECIPES,
   GET_DIETS,
   GET_DETAIL_RECIPE,
+  GET_RECIPES_BY_NAME,
+  ORDER_ALPHABETICAL,
+  ORDER_BY_HEALTH_SCORE,
 } from './actionsTypes';
 
 export const getRecipes = () => {
@@ -40,4 +43,20 @@ export const createRecipe = (payload) => {
   return async (dispatch) => {
     await axios.post('http://localhost:3001/create', payload);
   };
+};
+
+export const getRecipesByName = (name) => {
+  return async (dispatch) => {
+    const url = `http://localhost:3001/recipe?name=${name}`;
+    const { data } = await axios.get(url);
+    dispatch({ type: GET_RECIPES_BY_NAME, payload: data });
+  };
+};
+
+export const orderByAlphabetRecipes = (flag) => {
+  return { type: ORDER_ALPHABETICAL, payload: flag };
+};
+
+export const orderRecipesByHealthScore = (flag) => {
+  return { type: ORDER_BY_HEALTH_SCORE, payload: flag };
 };

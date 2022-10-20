@@ -1,13 +1,18 @@
 const { response, request } = require('express');
 const { getRecipesByNameOfDb } = require('../helpers');
 const { getRecipeDetailById } = require('../helpers/getRecipeDetailById');
+const { getRecipesOfDb } = require('../helpers/getRecipesOfDb');
 
 const getRecipesByName = async (req = request, res = response) => {
   const { name } = req.query;
-  if (!name) res.status(400).json({ msg: `Name is not defined!` });
+  if (name.length === 0) {
+    const allRecipesOfDb = await getRecipesOfDb();
+    res.json(allRecipesOfDb);
+    return;
+  }
   try {
     const recipes = await getRecipesByNameOfDb(name);
-    console.log('recipe de get', recipes);
+
     if (recipes) {
       res.status(200).json(recipes);
     } else {

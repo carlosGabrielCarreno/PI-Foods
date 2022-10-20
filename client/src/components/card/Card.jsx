@@ -51,7 +51,7 @@ const Diets = styled.h3`
 `;
 
 export const Card = (props) => {
-  const { image, title, typeOfDiets, id } = props;
+  const { image, title, typeOfDiets, id, healthScore } = props;
   const diets = typeOfDiets[0]?.diets.length
     ? typeOfDiets[0].diets.join(' ')
     : 'Not diets';
@@ -61,6 +61,7 @@ export const Card = (props) => {
       <ImgCard src={image} alt={title} />
       <ContainerInfoCard>
         <Title>{title}</Title>
+        <Title>{healthScore}</Title>
         <Diets>{diets}</Diets>
       </ContainerInfoCard>
     </CardContainer>

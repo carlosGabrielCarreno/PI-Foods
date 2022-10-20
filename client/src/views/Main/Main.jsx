@@ -1,9 +1,11 @@
 import { useSelect } from '@mui/base';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Cards, Navbar, Searchbar } from '../../components';
+import { BtnAlphabeticalOrder } from '../../components/buttons/BtnAlphabeticalOrder';
+import { getRecipes, getRecipesByName } from '../../store/actions';
 
 const MainContainer = styled.div`
   display: flex;
@@ -19,13 +21,29 @@ const MainContainer = styled.div`
   padding: 0.5rem;
 `;
 
+const loadRecipes = async (dispatch) => {
+  await dispatch(getRecipes());
+};
+
 export const Main = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    loadRecipes(dispatch);
+  }, []);
+
+  const onSubmitSearching = (e) => {
+    e.preventDefault();
+    dispatch(getRecipesByName(''));
+  };
 
   return (
     <MainContainer>
       <Navbar />
       <Searchbar />
+      <BtnAlphabeticalOrder />
+      <button onClick={onSubmitSearching}>reset</button>
       <button onClick={() => navigate('/create')}>create recipe</button>
       <Cards />
     </MainContainer>
