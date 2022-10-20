@@ -5,10 +5,13 @@ import './normalize.css';
 import { getDiets, getRecipes } from './store/actions';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { CardDetail } from './components';
+import { CardDetail, CreateRecipe } from './components';
 
-const load = async (dispatch) => {
+const loadRecipes = async (dispatch) => {
   await dispatch(getRecipes());
+};
+
+const loadTypesOfDiets = async (dispatch) => {
   await dispatch(getDiets());
 };
 
@@ -16,7 +19,11 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    load(dispatch);
+    loadRecipes(dispatch);
+  }, []);
+
+  useEffect(() => {
+    loadTypesOfDiets(dispatch);
   }, []);
 
   return (
@@ -27,6 +34,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/recipes" element={<Main />} />
         <Route path="/detail/:id" element={<CardDetail />} />
+        <Route path="/create" element={<CreateRecipe />} />
       </Routes>
     </>
   );

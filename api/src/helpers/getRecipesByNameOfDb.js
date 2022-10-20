@@ -7,7 +7,6 @@ const getRecipesByNameOfDb = async (name) => {
   return recipes.filter((recipe) =>
     recipe.title.toLowerCase().includes(name.toLowerCase())
   );
-  //.map((r) => r.title);
 };
 
 module.exports = {

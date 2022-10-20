@@ -29,10 +29,10 @@ const createRecipe = async (req = request, res = response) => {
         image,
         vegetarian,
         vegan,
-        glutenFree,
+        glutenFree: glutenFree.toString(),
         summary,
         healthScore,
-        analyzedInstructions,
+        analyzedInstructions: JSON.stringify(analyzedInstructions),
       };
       const newRecipe = await Recipe.create(objRecipe);
       //load the typeOfDiet
@@ -42,7 +42,7 @@ const createRecipe = async (req = request, res = response) => {
       }
       //
       if (newRecipe) {
-        res.status(200).send('Created');
+        res.status(200).send('Recipe Create');
       } else {
         throw new Error(newRecipe);
       }

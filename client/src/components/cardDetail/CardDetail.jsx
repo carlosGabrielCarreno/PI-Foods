@@ -96,7 +96,6 @@ export const CardDetail = () => {
   const dispatch = useDispatch();
   const { recipe } = useSelector((state) => state.detailRecipe);
   const { loading } = useSelector((state) => state.recipesLoading);
-
   const load = async (id) => {
     await dispatch(getDetailRecipe(id));
   };
@@ -132,9 +131,13 @@ export const CardDetail = () => {
 
             <TitleDetail>Instructions:</TitleDetail>
             <ul>
-              {recipe.analyzedInstructions?.map((elem) => {
-                return <Item key={uuidv4()}>{elem}</Item>;
-              })}
+              {Array.isArray(recipe.analyzedInstructions) ? (
+                recipe.analyzedInstructions.map((elem) => {
+                  return <Item key={uuidv4()}>{elem}</Item>;
+                })
+              ) : (
+                <p>{recipe.analyzedInstructions}</p>
+              )}
             </ul>
           </ContainerInfoDetail>
         </>

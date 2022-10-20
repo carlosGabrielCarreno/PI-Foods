@@ -18,11 +18,12 @@ const getRecipesOfDb = async () => {
       ],
       include: TypeOfDiet,
     });
-    /*  console.log(
-      'recipes de Db:',
-      recipes.map((r) => r.title)
-    ); */
-    return recipes;
+
+    if (recipes) {
+      return recipes;
+    } else {
+      throw new Error('recipes not found');
+    }
   } catch (error) {
     return new Error(error);
   }

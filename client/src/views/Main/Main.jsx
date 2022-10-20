@@ -1,3 +1,7 @@
+import { useSelect } from '@mui/base';
+import { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Cards, Navbar, Searchbar } from '../../components';
 
@@ -16,10 +20,13 @@ const MainContainer = styled.div`
 `;
 
 export const Main = () => {
+  const navigate = useNavigate();
+
   return (
     <MainContainer>
       <Navbar />
       <Searchbar />
+      <button onClick={() => navigate('/create')}>create recipe</button>
       <Cards />
     </MainContainer>
   );

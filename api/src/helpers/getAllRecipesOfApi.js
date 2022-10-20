@@ -16,7 +16,7 @@ const getAllRecipesOfApi = async () => {
       vegan: !recipe.vegan ? false : true,
       glutenFree: !recipe.glutenFree ? false : true,
       summary: recipe.summary,
-      diets: recipe.diets ? recipe.diets : null,
+      diets: recipe.diets ? recipe.diets : ['not diets'],
       analyzedInstructions: JSON.stringify(steps),
     };
   });

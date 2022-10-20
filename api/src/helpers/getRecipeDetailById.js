@@ -23,33 +23,52 @@ const getRecipeDetailById = async (id) => {
         },
       },
       include: TypeOfDiet,
+      through: { attributes: [] },
     });
+    // console.log(recipe);
+    // return recipe;
+
     if (recipe) {
-      return recipe;
+      //parseo los datos, para que el front reciba la data mas limpia y facil de manejar!
+      const [typeDiets] = recipe.typeOfDiets;
+      const { diets } = typeDiets;
+      const stepsArray = JSON.parse(recipe.analyzedInstructions);
+      const infoSteps = Array.isArray(stepsArray)
+        ? stepsArray.map((props) => {
+            const { number, step, ingredients, equipment } = props;
+            return `${number}. ${step}, ingredients: ${
+              ingredients.length
+                ? ingredients.map(({ name }) => name).join(' ')
+                : 'not ingredients'
+            }, equipment: ${
+              equipment.length
+                ? equipment.map(({ name }) => name).join(' ')
+                : 'not equiment'
+            }`;
+          })
+        : stepsArray;
+
+      const allStepsAndDataInfo = {
+        id: recipe.id,
+        title: recipe.title,
+        image: recipe.image,
+        vegetarian: recipe.vegetarian,
+        vegan: recipe.vegan,
+        glutenFree: recipe.glutenFree,
+        healthScore: recipe.healthScore,
+        typeOfDiets: diets.join(' '),
+        cuisines: recipe.cuisines.join(' '),
+        dishTypes: recipe.dishTypes.join(' '),
+        summary: recipe.summary.replace(/<[^>]+>/g, ''),
+        analyzedInstructions: infoSteps,
+      };
+      return allStepsAndDataInfo;
     } else {
       throw new Error('recipe not found my friend!');
     }
   } catch (error) {
-    return error.message;
+    return error;
   }
 };
 
 module.exports = { getRecipeDetailById };
-
-/* const { axios } = require('axios');
-
-const getRecipeDetailById = async (id) => {
-  try {
-    const url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=`;
-    const recipe = await axios.get(url + process.env.API_KEY);
-    if (recipe) {
-      return recipe;
-    } else {
-      throw new Error(recipe);
-    }
-  } catch (error) {
-    return error.message;
-  }
-};
-
-module.exports = { getRecipeDetailById }; */

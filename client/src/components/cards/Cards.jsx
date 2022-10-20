@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Card } from '../index';
-import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { Pagination } from '../pagination/Pagination';
+import { getRecipes } from '../../store/actions';
 
 const ContainerCards = styled.div`
   /*  border: solid green; */
@@ -18,7 +19,12 @@ const ContainerCards = styled.div`
   margin: 1rem 0;
 `;
 
+const loadRecipes = async (dispatch) => {
+  await dispatch(getRecipes());
+};
+
 export const Cards = () => {
+  const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.recipesLoading);
   const { allRecipes } = useSelector((state) => state.recipes);
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,6 +36,10 @@ export const Cards = () => {
   const paginado = (numPage) => {
     setCurrentPage(numPage);
   };
+
+  useEffect(() => {
+    loadRecipes(dispatch);
+  }, []);
 
   return (
     <>

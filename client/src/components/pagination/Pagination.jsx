@@ -14,7 +14,7 @@ const Item = styled.li`
   /* border: solid green; */
 `;
 
-const ValueItem = styled.a`
+const ValueItem = styled.button`
   background-color: #111110;
   text-decoration: none;
   color: #424141;
@@ -25,11 +25,17 @@ const ValueItem = styled.a`
   cursor: pointer;
   transition: all 300ms;
   position: relative;
-  :hover {
+  :focus {
     box-shadow: 0px 3px 15px rgba(248, 181, 37, 0.2);
     transform: scale(1.1);
     border: 1px solid #b19346;
     color: #b19346;
+  }
+  :hover {
+    box-shadow: 0px 3px 15px rgba(248, 181, 37, 0.173);
+    transform: scale(1.1);
+    border: 1px solid #a08748;
+    color: #9d823e;
   }
 `;
 
@@ -65,14 +71,8 @@ export const Pagination = (props) => {
   ) {
     pageNumber = [...pageNumber, index];
   }
-
   return (
     <ContainerPagination>
-      <Button
-        onClick={() => paginado((number) => (!number ? number : number - 1))}
-      >
-        Prev
-      </Button>
       {pageNumber && (
         <>
           {pageNumber.map((number, i) => (
@@ -82,11 +82,6 @@ export const Pagination = (props) => {
           ))}
         </>
       )}
-      <Button
-        onClick={() => paginado((number) => (number > 11 ? 0 : number + 1))}
-      >
-        Next
-      </Button>
     </ContainerPagination>
   );
 };
