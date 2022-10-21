@@ -61,7 +61,7 @@ export const Card = (props) => {
       <ImgCard src={image} alt={title} />
       <ContainerInfoCard>
         <Title>{title}</Title>
-        <Title>{healthScore}</Title>
+        {/* <Title>{healthScore}</Title> */}
         <Diets>{diets}</Diets>
       </ContainerInfoCard>
     </CardContainer>

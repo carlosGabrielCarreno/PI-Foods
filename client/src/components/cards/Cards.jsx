@@ -51,9 +51,17 @@ export const Cards = (props) => {
       <ContainerCards>
         {!loading ? (
           <>
-            {currentRecipes.map((recipe) => (
-              <Card key={recipe.id} {...recipe} />
-            ))}
+            {allRecipes.length > 0 ? (
+              <>
+                {currentRecipes.map((recipe) => (
+                  <Card key={recipe.id} {...recipe} />
+                ))}
+              </>
+            ) : (
+              <>
+                <h1>Recipes not Found</h1>
+              </>
+            )}
           </>
         ) : (
           <>

@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Cards, Navbar, Searchbar } from '../../components';
-import { BtnAlphabeticalOrder } from '../../components/buttons/BtnAlphabeticalOrder';
+import {
+  BtnAlphabeticalOrder,
+  FilteredByTypeOfDiet,
+} from '../../components/buttons';
+
 import { getRecipes, getRecipesByName } from '../../store/actions';
 
 const MainContainer = styled.div`
@@ -43,6 +47,7 @@ export const Main = () => {
       <Navbar />
       <Searchbar />
       <BtnAlphabeticalOrder />
+      <FilteredByTypeOfDiet />
       <button onClick={onSubmitSearching}>reset</button>
       <button onClick={() => navigate('/create')}>create recipe</button>
       <Cards />

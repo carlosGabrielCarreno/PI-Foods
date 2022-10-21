@@ -4,6 +4,7 @@ import {
   GET_RECIPES_BY_NAME,
   ORDER_ALPHABETICAL,
   ORDER_BY_HEALTH_SCORE,
+  FILTERED_TYPE_OF_DIET,
 } from '../actions/actionsTypes';
 
 const initialState = {
@@ -13,6 +14,22 @@ const initialState = {
 
 const recipes = (state = initialState, { type, payload }) => {
   switch (type) {
+    case FILTERED_TYPE_OF_DIET:
+      return {
+        ...state,
+        allRecipes: state.recipesLoaded.filter((recipe) => {
+          const [typeDiets] = recipe.typeOfDiets;
+          if (!typeDiets) return false;
+          const { diets } = typeDiets;
+          //console.log(diets);
+          if (diets.includes(payload)) {
+            return true;
+          } else {
+            return false;
+          }
+        }),
+      };
+
     case ORDER_BY_HEALTH_SCORE:
       const sortByHealthScore = (recipes) => [
         ...recipes.sort(

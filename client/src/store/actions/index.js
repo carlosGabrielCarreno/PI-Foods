@@ -7,6 +7,7 @@ import {
   GET_RECIPES_BY_NAME,
   ORDER_ALPHABETICAL,
   ORDER_BY_HEALTH_SCORE,
+  FILTERED_TYPE_OF_DIET,
 } from './actionsTypes';
 
 export const getRecipes = () => {
@@ -59,4 +60,8 @@ export const orderByAlphabetRecipes = (flag) => {
 
 export const orderRecipesByHealthScore = (flag) => {
   return { type: ORDER_BY_HEALTH_SCORE, payload: flag };
+};
+
+export const filteredByTypeOfDiet = (type) => {
+  return { type: FILTERED_TYPE_OF_DIET, payload: type };
 };
