@@ -1,26 +1,31 @@
 import styled from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
+import { Button } from '../../GlobalStyle.styled';
 
 const ContainerSearchBar = styled.div`
   width: 100%;
-  height: 15%;
+  max-width: 360px;
+  /* height: 100%; */
   /* border: solid pink; */
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  @media (min-width: 700px) {
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  height: 40px;
+  /* @media (min-width: 700px) {
     width: 40%;
-  }
+  } */
 `;
 
 const ContainerSearchInput = styled.div`
-  margin: 2rem 0 0 0;
+  margin: 0;
   border: 1px solid #fcf4e2;
+  /* border: solid orange; */
   border-radius: 0.5rem;
   display: flex;
   align-items: center;
-  height: 40px;
-  width: 100%;
+  height: 100%;
+  width: 90%;
   /* color: rgb(248, 181, 37); */
   box-shadow: rgb(248 181 37 / 20%) 0px 3px 15px;
 `;
@@ -43,8 +48,20 @@ const SearchInput = styled.input`
   cursor: pointer;
   ::placeholder {
     padding-left: 1rem;
-    font-size: 0.8rem;
+    /* font-size: 0.8rem; */
     color: #fcf4e2;
+  }
+`;
+
+const ButtonSearchbar = styled(Button)`
+  padding: 10px;
+  transition: none;
+  height: 100%;
+  :hover {
+    transform: none;
+    border: 0;
+    background: linear-gradient(#f8b525, #ffd160);
+    color: rgb(24 23 23 / 95%);
   }
 `;
 
@@ -54,4 +71,5 @@ export {
   ContainerSearchInput,
   SearchIcon,
   SearchInput,
+  ButtonSearchbar,
 };

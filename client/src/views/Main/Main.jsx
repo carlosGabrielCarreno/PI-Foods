@@ -1,55 +1,50 @@
-import { useSelect } from '@mui/base';
-import { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { Cards, Navbar, Searchbar } from '../../components';
-import {
-  BtnAlphabeticalOrder,
-  FilteredByTypeOfDiet,
-} from '../../components/buttons';
-
+import { useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { getRecipes, getRecipesByName } from '../../store/actions';
-
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  position: relative;
-  width: 96vw;
-  height: 100%;
-  border: 1px solid rgb(248, 181, 37);
-  margin: 0.8rem auto;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-`;
+import {
+  ButtonAlphabeticOrder,
+  ButtonHealthScoreOrder,
+  Cards,
+  FilteredByTypeOfDiet,
+  Navbar,
+  Searchbar,
+} from '../../components';
+import {
+  ButtonState,
+  ContainerButtons,
+  ContainerButtonsOrder,
+  MainContainer,
+} from './Main.styled';
 
 const loadRecipes = async (dispatch) => {
   await dispatch(getRecipes());
 };
 
 export const Main = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     loadRecipes(dispatch);
   }, []);
 
-  const onSubmitSearching = (e) => {
-    e.preventDefault();
+  const onSubmitSearching = (event) => {
+    event.preventDefault();
     dispatch(getRecipesByName(''));
   };
 
   return (
     <MainContainer>
       <Navbar />
-      <Searchbar />
-      <BtnAlphabeticalOrder />
-      <FilteredByTypeOfDiet />
-      <button onClick={onSubmitSearching}>reset</button>
-      <button onClick={() => navigate('/create')}>create recipe</button>
+      <ContainerButtons>
+        <Searchbar />
+        <ContainerButtonsOrder>
+          <ButtonState to="/create">Create</ButtonState>
+          <ButtonState onClick={onSubmitSearching}>Reset</ButtonState>
+          <ButtonHealthScoreOrder />
+          <ButtonAlphabeticOrder />
+          <FilteredByTypeOfDiet />
+        </ContainerButtonsOrder>
+      </ContainerButtons>
       <Cards />
     </MainContainer>
   );

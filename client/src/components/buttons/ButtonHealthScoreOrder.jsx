@@ -1,24 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  alphabeticOrder,
-  orderByAlphabetRecipes,
-  orderRecipesByHealthScore,
-} from '../../store/actions';
+import { orderRecipesByHealthScore } from '../../store/actions';
+import { ButtonOrder } from './Buttons.styled';
 
-export const BtnAlphabeticalOrder = () => {
+export const ButtonHealthScoreOrder = () => {
   const dispatch = useDispatch();
-
-  const [orderAlphabetic, setOrderAlphabetic] = useState('z-a');
   const [orderByHealthScore, setOrderByHealthScore] = useState(
     'order-by-healthScore'
   );
-
-  const handlerOrderAlphabetic = (event) => {
-    event.preventDefault();
-    setOrderAlphabetic(orderAlphabetic === 'z-a' ? 'a-z' : 'z-a');
-    dispatch(orderByAlphabetRecipes(true));
-  };
 
   const handlerOrderByHealthScore = (event) => {
     event.preventDefault();
@@ -35,13 +24,10 @@ export const BtnAlphabeticalOrder = () => {
   };
 
   return (
-    <div>
-      <button onClick={(e) => handlerOrderAlphabetic(e)}>
-        {orderAlphabetic}
-      </button>
-      <button onClick={(e) => handlerOrderByHealthScore(e)}>
+    <>
+      <ButtonOrder onClick={(event) => handlerOrderByHealthScore(event)}>
         {orderByHealthScore}
-      </button>
-    </div>
+      </ButtonOrder>
+    </>
   );
 };

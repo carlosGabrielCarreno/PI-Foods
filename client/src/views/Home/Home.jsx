@@ -3,7 +3,7 @@ import {
   HomeContainer,
   ImageBackground,
   Filler,
-  Button,
+  ButtonHome,
 } from './Home.styled.js';
 
 export const Home = () => {
@@ -11,7 +11,7 @@ export const Home = () => {
     <HomeContainer>
       <ImageBackground />
       <Filler />
-      <Button to="/recipes">Get Started</Button>
+      <ButtonHome to="/recipes">Get Started</ButtonHome>
     </HomeContainer>
   );
 };

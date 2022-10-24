@@ -31,7 +31,12 @@ const getRecipeDetailById = async (id) => {
     if (recipe) {
       //parseo los datos, para que el front reciba la data mas limpia y facil de manejar!
       const [typeDiets] = recipe.typeOfDiets;
-      const { diets } = typeDiets;
+      let diets;
+      if (typeDiets?.diets) {
+        diets = typeDiets.diets;
+      } else {
+        diets = ['not diets'];
+      }
       const stepsArray = JSON.parse(recipe.analyzedInstructions);
       const infoSteps = Array.isArray(stepsArray)
         ? stepsArray.map((props) => {
@@ -56,9 +61,9 @@ const getRecipeDetailById = async (id) => {
         vegan: recipe.vegan,
         glutenFree: recipe.glutenFree,
         healthScore: recipe.healthScore,
-        typeOfDiets: diets.join(' '),
-        cuisines: recipe.cuisines.join(' '),
-        dishTypes: recipe.dishTypes.join(' '),
+        typeOfDiets: diets.join(', '),
+        cuisines: recipe.cuisines.join(''),
+        dishTypes: recipe.dishTypes.join(', '),
         summary: recipe.summary.replace(/<[^>]+>/g, ''),
         analyzedInstructions: infoSteps,
       };

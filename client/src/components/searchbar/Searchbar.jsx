@@ -1,26 +1,27 @@
-//styles
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getRecipesByName } from '../../store/actions';
+
 import {
   ContainerSearchBar,
   ContainerSearchInput,
   ContainerSearchIcon,
   SearchIcon,
   SearchInput,
+  ButtonSearchbar,
 } from './Searchbar.styled';
 
 export const Searchbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
 
-  const onSearchChange = (e) => {
-    e.preventDefault();
-    setSearchTerm(e.target.value);
+  const onSearchChange = (event) => {
+    event.preventDefault();
+    setSearchTerm(event.target.value);
   };
 
-  const onSubmitSearching = (e) => {
-    e.preventDefault();
+  const onSubmitSearching = (event) => {
+    event.preventDefault();
     dispatch(getRecipesByName(searchTerm));
     setSearchTerm('');
   };
@@ -37,8 +38,8 @@ export const Searchbar = () => {
           value={searchTerm}
           onChange={onSearchChange}
         />
-        <button onClick={onSubmitSearching}>Search</button>
       </ContainerSearchInput>
+      <ButtonSearchbar onClick={onSubmitSearching}>Search</ButtonSearchbar>
     </ContainerSearchBar>
   );
 };

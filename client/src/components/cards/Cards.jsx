@@ -1,32 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled, { keyframes } from 'styled-components';
 import { getRecipes } from '../../store/actions';
 import { Card } from '../index';
 import { Pagination } from '../pagination/Pagination';
+import { ContainerCards, LoadingTitle } from './Cards.styled';
 
-const ContainerCards = styled.div`
-  /*  border: solid green; */
-  border: 0;
-  width: 100%;
-  height: 100%;
-  /* height: 100vh;
-  width: 100vw; */
-  display: grid;
-  gap: 2rem;
-  grid-auto-rows: 23rem;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  margin: 1rem 0;
-`;
-
-/* const loadRecipes = async (dispatch) => {
-  await dispatch(getRecipes());
-};
- */
-export const Cards = (props) => {
+export const Cards = () => {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.recipesLoading);
   const { allRecipes } = useSelector((state) => state.recipes);
+  const { loading } = useSelector((state) => state.recipesLoading);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(9);
   const indexLastRecipe = currentPage * recipesPerPage;
@@ -37,38 +19,41 @@ export const Cards = (props) => {
     setCurrentPage(numPage);
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     dispatch(getRecipes());
-  }, [dispatch]);
+  }, [dispatch]); */
 
   return (
     <>
-      <Pagination
-        allRecipes={allRecipes.length}
-        recipesPerPage={recipesPerPage}
-        paginado={paginado}
-      />
-      <ContainerCards>
-        {!loading ? (
-          <>
-            {allRecipes.length > 0 ? (
+      {!loading ? (
+        <>
+          <Pagination
+            allRecipes={allRecipes.length}
+            recipesPerPage={recipesPerPage}
+            paginado={paginado}
+          />
+          <ContainerCards>
+            {currentRecipes.length ? (
               <>
                 {currentRecipes.map((recipe) => (
                   <Card key={recipe.id} {...recipe} />
                 ))}
               </>
             ) : (
+              //cuando no capta que hay recipes en la paginacion actual!
               <>
-                <h1>Recipes not Found</h1>
+                {allRecipes.map((recipe) => (
+                  <Card key={recipe.id} {...recipe} />
+                ))}
               </>
             )}
-          </>
-        ) : (
-          <>
-            <h1>Load...</h1>
-          </>
-        )}
-      </ContainerCards>
+          </ContainerCards>
+        </>
+      ) : (
+        <>
+          <LoadingTitle>Load...</LoadingTitle>
+        </>
+      )}
     </>
   );
 };

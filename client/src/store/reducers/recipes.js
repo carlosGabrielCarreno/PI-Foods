@@ -31,16 +31,18 @@ const recipes = (state = initialState, { type, payload }) => {
       };
 
     case ORDER_BY_HEALTH_SCORE:
-      const sortByHealthScore = (recipes) => [
-        ...recipes.sort(
-          (recipe1, recipe2) => recipe2.healthScore - recipe1.healthScore
+      const sortByHealthScore = (recipes, flag = true) => [
+        ...recipes.sort((recipe1, recipe2) =>
+          flag
+            ? recipe2.healthScore - recipe1.healthScore
+            : recipe1.healthScore - recipe2.healthScore
         ),
       ];
       let orderByHealthScoreAux;
       if (payload) {
         orderByHealthScoreAux = sortByHealthScore(state.allRecipes);
       } else {
-        orderByHealthScoreAux = [...state.recipesLoaded];
+        orderByHealthScoreAux = sortByHealthScore(state.allRecipes, false);
       }
       return {
         ...state,

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filteredByTypeOfDiet } from '../../store/actions';
+import { ContainerSelect, SelectElement } from './FilteredByTypeOfDiet.styled';
 
 export const FilteredByTypeOfDiet = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState([]);
+  const [value, setValue] = useState(['']);
   const { diets } = useSelector((state) => state.diets);
 
   const handleSelect = (e) => {
@@ -14,18 +15,21 @@ export const FilteredByTypeOfDiet = () => {
   const onFilteredByTypeOfDiet = (e) => {
     e.preventDefault();
     const [type] = value;
-    dispatch(filteredByTypeOfDiet(type));
+    if (type.length > 0) {
+      //console.log('soy type', type);
+      dispatch(filteredByTypeOfDiet(type));
+    }
   };
 
   return (
-    <div onClick={onFilteredByTypeOfDiet}>
-      <select onChange={handleSelect}>
+    <ContainerSelect onClick={onFilteredByTypeOfDiet}>
+      <SelectElement onChange={handleSelect}>
         {diets?.map((diet) => (
           <option key={diet} value={diet}>
             {diet}
           </option>
         ))}
-      </select>
-    </div>
+      </SelectElement>
+    </ContainerSelect>
   );
 };

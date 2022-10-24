@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Button } from '../../GlobalStyle.styled';
 import backgroundImage from '../../image/bghome.jpg';
 import backgroundImageFullScreen from '../../image/bkfullscreen.jpg';
 
@@ -50,7 +50,8 @@ const Filler = styled.div`
   position: absolute;
 `;
 
-const Button = styled(Link)`
+const ButtonHome = styled(Button)`
+  height: 8%;
   padding: 15px 10px;
   border: 0;
   transition: all 600ms;
@@ -70,8 +71,9 @@ const Button = styled(Link)`
   }
   @media (min-width: 500px) {
     padding: 20px 15px;
+    height: 9%;
     font-size: 16px;
   }
 `;
 
-export { HomeContainer, ImageBackground, Button, Filler };
+export { HomeContainer, ImageBackground, ButtonHome, Filler };
