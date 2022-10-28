@@ -12,6 +12,7 @@ import {
   Text,
   TitleDetail,
 } from './CardDetail.styled';
+import { Load } from '../index';
 
 export const CardDetail = () => {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ export const CardDetail = () => {
         </>
       ) : (
         <>
-          <h1>loading</h1>
+          <Load />
         </>
       )}
     </DetailContainer>

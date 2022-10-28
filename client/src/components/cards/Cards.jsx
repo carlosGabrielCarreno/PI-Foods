@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRecipes } from '../../store/actions';
 import { Card } from '../index';
 import { Pagination } from '../pagination/Pagination';
-import { ContainerCards, LoadingTitle } from './Cards.styled';
+import { ContainerCards } from './Cards.styled';
+import { Load } from '../index';
 
 export const Cards = () => {
   const dispatch = useDispatch();
@@ -18,10 +19,6 @@ export const Cards = () => {
   const paginado = (numPage) => {
     setCurrentPage(numPage);
   };
-
-  /*   useEffect(() => {
-    dispatch(getRecipes());
-  }, [dispatch]); */
 
   return (
     <>
@@ -51,7 +48,7 @@ export const Cards = () => {
         </>
       ) : (
         <>
-          <LoadingTitle>Load...</LoadingTitle>
+          <Load />
         </>
       )}
     </>

@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getRecipes, getRecipesByName } from '../../store/actions';
 import {
   ButtonAlphabeticOrder,
@@ -22,6 +22,7 @@ const loadRecipes = async (dispatch) => {
 
 export const Main = () => {
   const dispatch = useDispatch();
+  const { allRecipes } = useSelector((state) => state.recipes);
 
   useEffect(() => {
     loadRecipes(dispatch);
@@ -31,7 +32,6 @@ export const Main = () => {
     event.preventDefault();
     dispatch(getRecipesByName(''));
   };
-
   return (
     <MainContainer>
       <Navbar />

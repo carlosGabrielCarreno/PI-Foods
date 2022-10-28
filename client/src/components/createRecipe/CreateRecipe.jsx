@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { createRecipe } from '../../store/actions';
 import { useNavigate } from 'react-router-dom';
@@ -13,27 +14,48 @@ import {
   ContainerItems,
   Span,
   ContainerFormInputs,
+  SpanCheck,
+  ListItemChecked,
 } from './CreateRecipe.styled';
 import { SelectElement } from '../buttons/FilteredByTypeOfDiet.styled';
+import { getCusines } from '../../helpers';
 
 export const CreateRecipe = () => {
+  // inputs checkbox
+  const [checkedState, setCheckedState] = useState(new Array(3).fill(false));
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+    console.log(checkedState);
+  };
+  //
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const { diets } = useSelector((state) => state.diets);
+  const cusinesArr = getCusines();
+  const [checkboxes, setCheckboxes] = useState([
+    'vegan',
+    'glutenFree',
+    'vegetarian',
+  ]);
   const [values, setValues] = useState({
     title: '',
     image: imageRecipe,
-    vegetarian: true,
-    vegan: true,
-    glutenFree: true,
+    vegetarian: false,
+    vegan: false,
+    glutenFree: false,
     summary: '',
     healthScore: '',
     analyzedInstructions: '',
-    cuisines: ['african', 'argento'],
-    dishTypes: ['pescao', 'nose'],
+    cuisines: [],
+    dishTypes: ['not dish types'],
     diets: [],
   });
   const handleChange = (e) => {
+    console.log(e.target.value);
     setValues({
       ...values,
       [e.target.name]: e.target.value,
@@ -49,30 +71,53 @@ export const CreateRecipe = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(createRecipe(values));
-    setValues({
-      title: '',
-      image: 'https://spoonacular.com/recipeImages/716426-312x231.jpg',
-      vegetarian: true,
-      vegan: true,
-      glutenFree: true,
-      summary: '',
-      healthScore: '',
-      analyzedInstructions: '',
-      cuisines: ['african', 'argento'],
-      dishTypes: ['pescao', 'nose'],
-      diets: [],
-    });
-    alert('recipe create!');
-    navigate('/recipes');
+  const handleCusines = ({ target }) => {
+    if (!values.cuisines.includes(target.value)) {
+      setValues({
+        ...values,
+        cuisines: [...values.cuisines, target.value],
+      });
+    }
   };
 
-  const onFilter = (diet) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    values.vegan = checkedState[0];
+    values.glutenFree = checkedState[1];
+    values.vegetarian = checkedState[2];
+    console.log('lo que se despacha:', values);
+    if (
+      !values.title.length &&
+      !values.diets.length &&
+      !values.cuisines.length &&
+      !values.summary.length &&
+      !values.healthScore.length
+    ) {
+      alert('Missing Data!');
+    } else {
+      dispatch(createRecipe(values));
+      setValues({
+        title: '',
+        image: 'https://spoonacular.com/recipeImages/716426-312x231.jpg',
+        vegetarian: false,
+        vegan: false,
+        glutenFree: false,
+        summary: '',
+        healthScore: '',
+        analyzedInstructions: '',
+        cuisines: [],
+        dishTypes: ['not dish types'],
+        diets: [],
+      });
+      alert('recipe create!');
+      navigate('/recipes');
+    }
+  };
+
+  const onFilter = (value, list) => {
     setValues({
       ...values,
-      diets: values.diets.filter((item) => item !== diet),
+      [list]: values[list].filter((item) => item !== value),
     });
   };
 
@@ -113,19 +158,53 @@ export const CreateRecipe = () => {
         <ContainerFormInputs>
           <SelectElement onChange={handleSelect}>
             {diets?.map((diet) => (
-              <option key={diet} value={diet}>
+              <option key={uuidv4()} value={diet}>
                 {diet}
               </option>
             ))}
           </SelectElement>
           <ContainerItems>
             {values.diets.map((diet) => (
-              <Item key={diet}>
+              <Item key={uuidv4()}>
                 {diet}
-                <Span onClick={() => onFilter(diet)}>x</Span>
+                <Span onClick={() => onFilter(diet, 'diets')}>x</Span>
               </Item>
             ))}
           </ContainerItems>
+        </ContainerFormInputs>
+        <ContainerFormInputs>
+          <SelectElement onChange={handleCusines}>
+            {cusinesArr?.map((cusine) => (
+              <option key={uuidv4()} value={cusine}>
+                {cusine}
+              </option>
+            ))}
+          </SelectElement>
+          <ContainerItems>
+            {values.cuisines.map((cusine) => (
+              <Item key={uuidv4()}>
+                {cusine}
+                <Span onClick={() => onFilter(cusine, 'cuisines')}>x</Span>
+              </Item>
+            ))}
+          </ContainerItems>
+          <ListItemChecked>
+            {checkboxes.map((check, index) => {
+              return (
+                <label key={uuidv4()}>
+                  <SpanCheck>{check}: </SpanCheck>
+                  <InputForm
+                    type="checkbox"
+                    id={`custom-checkbox-${index}`}
+                    name={check}
+                    value={check}
+                    checked={checkedState[index]}
+                    onChange={() => handleOnChange(index)}
+                  />
+                </label>
+              );
+            })}
+          </ListItemChecked>
         </ContainerFormInputs>
         <Button type="submit">Create Recipe</Button>
       </Form>

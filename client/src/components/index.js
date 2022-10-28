@@ -5,3 +5,4 @@ export * from './card';
 export * from './cardDetail';
 export * from './createRecipe';
 export * from './buttons';
+export * from './load';

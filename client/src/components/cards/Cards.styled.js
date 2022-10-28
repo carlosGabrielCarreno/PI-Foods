@@ -13,12 +13,3 @@ width: 100vw; */
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   margin: 1rem 0;
 `;
-
-export const LoadingTitle = styled.h1`
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 95vw;
-  height: 95vh;
-`;

@@ -10,8 +10,6 @@ const MainContainer = styled.div`
   position: relative;
   gap: 1rem;
   width: 96%;
-  /* height: 100%; */
-  /* height: 100vh; */
   border: 1px solid rgb(248, 181, 37);
   margin: 0.8rem auto;
   border-radius: 0.5rem;

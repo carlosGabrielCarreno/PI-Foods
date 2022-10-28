@@ -2,10 +2,18 @@ import styled from 'styled-components';
 
 export const ContainerCreateRecipe = styled.div`
   /* border: solid red; */
-  width: 100vw;
+  /* width: 100vw; */
+  border-radius: 0.5rem;
+  width: 96%;
   height: 100vh;
   color: #fff;
   padding: 0.7rem;
+  /* height: 100%; */
+  border: 1px solid rgb(248, 181, 37);
+  margin: 0.8rem auto;
+  overflow: hidden;
+
+  height: 100vh;
 `;
 
 export const InputForm = styled.input`
@@ -23,7 +31,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 70%;
-  height: 95%;
+  height: 85%;
   margin: 0 auto;
 `;
 
@@ -40,6 +48,7 @@ export const TextArea = styled.textarea`
 `;
 
 export const Button = styled.button`
+  position: relative;
   padding: 10px;
   border: 0;
   backdrop-filter: blur(10px);
@@ -98,13 +107,23 @@ export const Span = styled.span`
   }
 `;
 
+export const SpanCheck = styled(Span)`
+  color: grey;
+`;
+
 export const ContainerFormInputs = styled.div`
+  border: solid green;
   @media (min-width: 800px) {
-    /* border: solid green; */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     height: 30%;
   }
+`;
+
+export const ListItemChecked = styled.ul`
+  margin: 1rem;
+  position: relative;
+  border: solid red;
 `;

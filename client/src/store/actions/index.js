@@ -48,9 +48,11 @@ export const createRecipe = (payload) => {
 
 export const getRecipesByName = (name) => {
   return async (dispatch) => {
+    dispatch({ type: SET_RECIPES_LOADING, payload: true });
     const url = `http://localhost:3001/recipe?name=${name}`;
     const { data } = await axios.get(url);
     dispatch({ type: GET_RECIPES_BY_NAME, payload: data });
+    dispatch({ type: SET_RECIPES_LOADING, payload: false });
   };
 };
 

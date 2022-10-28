@@ -13,6 +13,7 @@ export const SelectElement = styled.select`
   border-radius: 0.5rem;
   padding: 10px;
   color: #111110;
+  margin-bottom: 0.5rem;
   background: linear-gradient(to right, #ffd160, #f8b525);
   :hover {
     background: linear-gradient(#f8b525, #ffd160);
