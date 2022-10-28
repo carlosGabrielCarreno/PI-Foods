@@ -48,7 +48,7 @@ export const TextArea = styled.textarea`
 `;
 
 export const Button = styled.button`
-  position: relative;
+  /* position: relative; */
   padding: 10px;
   border: 0;
   backdrop-filter: blur(10px);
