@@ -15,18 +15,10 @@ import {
   ContainerButtonsOrder,
   MainContainer,
 } from './Main.styled';
-
-const loadRecipes = async (dispatch) => {
-  await dispatch(getRecipes());
-};
+import { Pagination } from '../../components/pagination/Pagination';
 
 export const Main = () => {
   const dispatch = useDispatch();
-  const { allRecipes } = useSelector((state) => state.recipes);
-
-  useEffect(() => {
-    loadRecipes(dispatch);
-  }, []);
 
   const onSubmitSearching = (event) => {
     event.preventDefault();
@@ -45,6 +37,7 @@ export const Main = () => {
           <FilteredByTypeOfDiet />
         </ContainerButtonsOrder>
       </ContainerButtons>
+      <Pagination />
       <Cards />
     </MainContainer>
   );

@@ -2,7 +2,7 @@ import { GlobalStyle } from './GlobalStyle.styled';
 import { Route, Routes } from 'react-router-dom';
 import { Home, Main } from './views';
 import './normalize.css';
-import { getDiets, getRecipes } from './store/actions';
+import { getDiets, getRecipes, setRecipesPerPage } from './store/actions';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { CardDetail, CreateRecipe } from './components';
@@ -24,6 +24,13 @@ const App = () => {
 
   useEffect(() => {
     loadTypesOfDiets(dispatch);
+  }, []);
+
+  useEffect(() => {
+    const loadPagination = async () => {
+      await dispatch(setRecipesPerPage(1));
+    };
+    loadPagination();
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 import {
-  ADD_RECIPE,
+  SET_CURRENT_PAGE_RECIPES,
   SET_RECIPES,
   GET_RECIPES_BY_NAME,
   ORDER_ALPHABETICAL,
@@ -10,10 +10,30 @@ import {
 const initialState = {
   allRecipes: [],
   recipesLoaded: [],
+  currentRecipes: [],
+  currentPage: 1,
+  recipesPerPage: 9,
+  indexLastRecipe: 0,
+  indexFirstRecipe: 0,
 };
 
 const recipes = (state = initialState, { type, payload }) => {
   switch (type) {
+    case SET_CURRENT_PAGE_RECIPES:
+      console.log('hola', payload);
+      state.currentPage = payload;
+      state.indexLastRecipe = state.currentPage * state.recipesPerPage;
+      state.indexFirstRecipe = state.indexLastRecipe - state.recipesPerPage;
+      return {
+        ...state,
+        /* currentPage: payload, */
+        /* indexLastRecipe: , */
+        /* indexFirstRecipe: state.indexLastRecipe - state.recipesPerPage, */
+        currentRecipes: state.allRecipes.slice(
+          state.indexFirstRecipe,
+          state.indexLastRecipe
+        ),
+      };
     case FILTERED_TYPE_OF_DIET:
       return {
         ...state,

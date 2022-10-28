@@ -8,6 +8,7 @@ import {
   ORDER_ALPHABETICAL,
   ORDER_BY_HEALTH_SCORE,
   FILTERED_TYPE_OF_DIET,
+  SET_CURRENT_PAGE_RECIPES,
 } from './actionsTypes';
 
 export const getRecipes = () => {
@@ -66,4 +67,14 @@ export const orderRecipesByHealthScore = (flag) => {
 
 export const filteredByTypeOfDiet = (type) => {
   return { type: FILTERED_TYPE_OF_DIET, payload: type };
+};
+
+export const setRecipesPerPage = (currentPage) => {
+  return async (dispatch) => {
+    if (currentPage) {
+      await dispatch({ type: SET_RECIPES_LOADING, payload: true });
+      await dispatch({ type: SET_CURRENT_PAGE_RECIPES, payload: currentPage });
+      await dispatch({ type: SET_RECIPES_LOADING, payload: false });
+    }
+  };
 };
