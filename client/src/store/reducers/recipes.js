@@ -26,9 +26,6 @@ const recipes = (state = initialState, { type, payload }) => {
       state.indexFirstRecipe = state.indexLastRecipe - state.recipesPerPage;
       return {
         ...state,
-        /* currentPage: payload, */
-        /* indexLastRecipe: , */
-        /* indexFirstRecipe: state.indexLastRecipe - state.recipesPerPage, */
         currentRecipes: state.allRecipes.slice(
           state.indexFirstRecipe,
           state.indexLastRecipe

@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Card } from '../index';
-import { Pagination } from '../pagination/Pagination';
 import { ContainerCards } from './Cards.styled';
 import { Load } from '../index';
 

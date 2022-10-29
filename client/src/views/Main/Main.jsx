@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRecipes, getRecipesByName } from '../../store/actions';
+import { useDispatch } from 'react-redux';
+import { getRecipesByName } from '../../store/actions';
 import {
   ButtonAlphabeticOrder,
   ButtonHealthScoreOrder,

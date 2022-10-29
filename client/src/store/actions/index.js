@@ -46,7 +46,7 @@ export const createRecipe = (payload) => {
     await axios.post('http://localhost:3001/create', payload);
   };
 };
-
+//
 export const getRecipesByName = (name) => {
   return async (dispatch) => {
     dispatch({ type: SET_RECIPES_LOADING, payload: true });
@@ -56,7 +56,7 @@ export const getRecipesByName = (name) => {
     dispatch({ type: SET_RECIPES_LOADING, payload: false });
   };
 };
-
+//
 export const orderByAlphabetRecipes = (flag) => {
   return { type: ORDER_ALPHABETICAL, payload: flag };
 };
