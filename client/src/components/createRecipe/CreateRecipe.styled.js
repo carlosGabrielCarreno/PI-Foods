@@ -1,19 +1,14 @@
 import styled from 'styled-components';
 
 export const ContainerCreateRecipe = styled.div`
-  /* border: solid red; */
-  /* width: 100vw; */
   border-radius: 0.5rem;
   width: 96%;
-  height: 100vh;
+  height: 100%;
   color: #fff;
-  padding: 0.7rem;
-  /* height: 100%; */
+  padding: 0.8rem;
   border: 1px solid rgb(248, 181, 37);
   margin: 0.8rem auto;
   overflow: hidden;
-
-  height: 100vh;
 `;
 
 export const InputForm = styled.input`
@@ -31,8 +26,11 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 70%;
-  height: 85%;
+  height: 100%;
   margin: 0 auto;
+  @media (min-width: 850px) {
+    height: 100vh;
+  }
 `;
 
 export const TextArea = styled.textarea`
@@ -48,7 +46,6 @@ export const TextArea = styled.textarea`
 `;
 
 export const Button = styled.button`
-  /* position: relative; */
   padding: 10px;
   border: 0;
   backdrop-filter: blur(10px);
@@ -61,7 +58,7 @@ export const Button = styled.button`
   background: linear-gradient(to right, #ffd160, #f8b525);
   color: #111110;
   max-width: 300px;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   :hover {
     background: linear-gradient(#f8b525, #ffd160);
     color: rgb(24 23 23 / 95%);
@@ -112,7 +109,6 @@ export const SpanCheck = styled(Span)`
 `;
 
 export const ContainerFormInputs = styled.div`
-  border: solid green;
   @media (min-width: 800px) {
     display: flex;
     flex-wrap: wrap;
@@ -125,5 +121,4 @@ export const ContainerFormInputs = styled.div`
 export const ListItemChecked = styled.ul`
   margin: 1rem;
   position: relative;
-  border: solid red;
 `;
