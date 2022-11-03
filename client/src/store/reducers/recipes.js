@@ -13,14 +13,13 @@ const initialState = {
   currentRecipes: [],
   currentPage: 1,
   recipesPerPage: 9,
-  indexLastRecipe: 0,
+  indexLastRecipe: 9,
   indexFirstRecipe: 0,
 };
 
 const recipes = (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_CURRENT_PAGE_RECIPES:
-      console.log('hola', payload);
       state.currentPage = payload;
       state.indexLastRecipe = state.currentPage * state.recipesPerPage;
       state.indexFirstRecipe = state.indexLastRecipe - state.recipesPerPage;
@@ -32,19 +31,22 @@ const recipes = (state = initialState, { type, payload }) => {
         ),
       };
     case FILTERED_TYPE_OF_DIET:
+      state.allRecipes = state.recipesLoaded.filter((recipe) => {
+        const [typeDiets] = recipe.typeOfDiets;
+        if (!typeDiets) return false;
+        const { diets } = typeDiets;
+        if (diets.includes(payload)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
       return {
         ...state,
-        allRecipes: state.recipesLoaded.filter((recipe) => {
-          const [typeDiets] = recipe.typeOfDiets;
-          if (!typeDiets) return false;
-          const { diets } = typeDiets;
-          //console.log(diets);
-          if (diets.includes(payload)) {
-            return true;
-          } else {
-            return false;
-          }
-        }),
+        currentPage: 1,
+        indexLastRecipe: 9,
+        indexFirstRecipe: 0,
+        currentRecipes: state.allRecipes.slice(0, 9),
       };
 
     case ORDER_BY_HEALTH_SCORE:
@@ -69,20 +71,32 @@ const recipes = (state = initialState, { type, payload }) => {
       const sortByAlphabet = (recipes, flag = false) => {
         return flag ? recipes.sort().reverse() : recipes.sort();
       };
+      state.allRecipes = sortByAlphabet(state.allRecipes, payload);
       return {
         ...state,
-        allRecipes: sortByAlphabet(state.allRecipes, payload),
+        currentPage: 1,
+        indexLastRecipe: 9,
+        indexFirstRecipe: 0,
+        currentRecipes: state.allRecipes.slice(0, 9),
       };
     case SET_RECIPES:
       return {
         ...state,
         allRecipes: [...payload],
         recipesLoaded: [...payload],
+        currentRecipes: [...payload].slice(
+          state.indexFirstRecipe,
+          state.indexLastRecipe
+        ),
       };
     case GET_RECIPES_BY_NAME:
       return {
         ...state,
         allRecipes: payload,
+        currentPage: 1,
+        indexLastRecipe: 9,
+        indexFirstRecipe: 0,
+        currentRecipes: payload.slice(0, 9),
       };
     default:
       return state;

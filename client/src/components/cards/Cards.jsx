@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card } from '../index';
 import { ContainerCards } from './Cards.styled';
 import { Load } from '../index';
@@ -12,13 +12,9 @@ export const Cards = () => {
       {!loading ? (
         <>
           <ContainerCards>
-            {currentRecipes.length && (
-              <>
-                {currentRecipes.map((recipe) => (
-                  <Card key={recipe.id} {...recipe} />
-                ))}
-              </>
-            )}
+            {currentRecipes?.map((recipe) => (
+              <Card key={recipe.id} {...recipe} />
+            ))}
           </ContainerCards>
         </>
       ) : (

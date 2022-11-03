@@ -1,16 +1,13 @@
 import styled from 'styled-components';
 
 export const ContainerPagination = styled.div`
-  /* border: solid red; */
   margin: 1rem 0;
   width: 100%;
   gap: 1rem;
-  /* margin: 1.5rem 0; */
   display: flex;
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-  /* padding: 1.5rem 0; */
 `;
 
 export const ValueItem = styled.button`
@@ -36,27 +33,5 @@ export const ValueItem = styled.button`
     transform: scale(1.1);
     border: 1px solid #a08748;
     color: #9d823e;
-  }
-`;
-
-export const Button = styled.button`
-  transition: all 600ms;
-  backdrop-filter: blur(10px);
-  cursor: pointer;
-  padding: 0.2rem;
-  border-radius: 5px;
-  font-weight: 600;
-  border: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0 1rem;
-  position: relative;
-  background: linear-gradient(to right, #ffd160, #f8b525);
-  color: #111110;
-  :hover {
-    color: #f8b525;
-    background: transparent;
-    border: 1px solid #f8b525;
-    transform: scale(1.1);
   }
 `;
