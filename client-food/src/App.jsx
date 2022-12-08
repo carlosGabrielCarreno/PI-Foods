@@ -15,7 +15,7 @@ const loadTypesOfDiets = async (dispatch) => {
   await dispatch(getDiets());
 };
 
-const App = () => {
+function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,6 +38,6 @@ const App = () => {
       </Routes>
     </>
   );
-};
+}
 
 export default App;
