@@ -11,6 +11,7 @@ const MainContainer = styled.div`
   gap: 1rem;
   width: 96%;
   border: 1px solid rgb(248, 181, 37);
+  max-width: 1200px;
   margin: 0.8rem auto;
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -45,7 +46,8 @@ const ButtonState = styled(Link)`
   backdrop-filter: blur(10px);
   cursor: pointer;
   height: 40px;
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: capitalize;
   font-size: 14px;
   border-radius: 0.5rem;
   border: 0;

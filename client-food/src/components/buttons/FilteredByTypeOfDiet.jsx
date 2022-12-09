@@ -16,7 +16,6 @@ export const FilteredByTypeOfDiet = () => {
     e.preventDefault();
     const [type] = value;
     if (type.length > 0) {
-      //console.log('soy type', type);
       dispatch(filteredByTypeOfDiet(type));
     }
   };
