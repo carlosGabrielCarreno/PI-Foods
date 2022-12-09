@@ -9,7 +9,11 @@ export const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+  border: 1px solid rgb(248, 181, 37);
+  border-radius: 0.5rem;
   @media (min-width: 860px) {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;

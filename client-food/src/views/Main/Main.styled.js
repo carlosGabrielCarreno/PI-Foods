@@ -11,9 +11,9 @@ const MainContainer = styled.div`
   gap: 1rem;
   width: 96%;
   border: 1px solid rgb(248, 181, 37);
+  border-radius: 0.5rem;
   max-width: 1200px;
   margin: 0.8rem auto;
-  border-radius: 0.5rem;
   padding: 0.5rem;
 `;
 

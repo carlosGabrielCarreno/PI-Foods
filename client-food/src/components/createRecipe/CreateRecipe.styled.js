@@ -6,6 +6,7 @@ export const ContainerCreateRecipe = styled.div`
   height: 100%;
   color: #fff;
   padding: 0.8rem;
+  max-width: 1200px;
   border: 1px solid rgb(248, 181, 37);
   margin: 0.8rem auto;
   overflow: hidden;
