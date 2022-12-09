@@ -4,7 +4,7 @@ export const DetailContainer = styled.div`
   /* border: solid red; */
   width: 100%;
   height: 100%;
-  padding: 0.5rem;
+  padding: 1rem;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -58,11 +58,10 @@ export const ImgDetail = styled.img`
   /*  @media (min-width: 700px) {
     width: 100%;
     height: 300px;
-  }
+  }*/
   @media (min-width: 1000px) {
-    width: 100%;
-    height: 60%;
-  } */
+    margin: 2rem 0;
+  }
 `;
 
 export const Text = styled.span`

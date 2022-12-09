@@ -66,6 +66,10 @@ const recipes = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allRecipes: orderByHealthScoreAux,
+        currentPage: 1,
+        indexLastRecipe: 9,
+        indexFirstRecipe: 0,
+        currentRecipes: orderByHealthScoreAux.slice(0, 9),
       };
     case ORDER_ALPHABETICAL:
       const sortByAlphabet = (recipes, flag = false) => {
