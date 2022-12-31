@@ -22,7 +22,7 @@ export const ValueItem = styled.button`
   cursor: pointer;
   transition: all 300ms;
   position: relative;
-  :focus {
+  &.focus {
     box-shadow: 0px 3px 15px rgba(248, 181, 37, 0.2);
     transform: scale(1.1);
     border: 1px solid #b19346;

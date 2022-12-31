@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { createRecipe } from '../../store/actions';
 import { useNavigate } from 'react-router-dom';
+import ErrorIcon from '@mui/icons-material/Error';
 import imageRecipe from '../../assets/foodCreateRecipe.jpg';
 import {
   ContainerCreateRecipe,
@@ -16,6 +17,7 @@ import {
   ContainerFormInputs,
   SpanCheck,
   ListItemChecked,
+  MessageAlert,
 } from './CreateRecipe.styled';
 import { SelectElement } from '../buttons/FilteredByTypeOfDiet.styled';
 import { getCusines } from '../../helpers';
@@ -29,13 +31,14 @@ export const CreateRecipe = () => {
     );
 
     setCheckedState(updatedCheckedState);
-    console.log(checkedState);
+    //console.log(checkedState);
   };
   //
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const { diets } = useSelector((state) => state.diets);
   const cusinesArr = getCusines();
+  const [missingData, setMissingData] = useState(false);
   const [checkboxes, setCheckboxes] = useState([
     'vegan',
     'glutenFree',
@@ -87,15 +90,15 @@ export const CreateRecipe = () => {
     values.vegetarian = checkedState[2];
     console.log('lo que se despacha:', values);
     if (
-      !values.title.length &&
-      !values.diets.length &&
-      !values.cuisines.length &&
-      !values.summary.length &&
-      !values.healthScore.length
+      values.title.length > 1 &&
+      values.diets.length > 1 &&
+      values.cuisines.length > 1 &&
+      values.summary.length > 1 &&
+      values.healthScore.length > 1
     ) {
-      alert('Missing Data!');
-    } else {
+      values.healthScore = parseInt(values.healthScore);
       dispatch(createRecipe(values));
+      alert('recipe create!');
       setValues({
         title: '',
         image: 'https://spoonacular.com/recipeImages/716426-312x231.jpg',
@@ -109,8 +112,11 @@ export const CreateRecipe = () => {
         dishTypes: ['not dish types'],
         diets: [],
       });
-      alert('recipe create!');
-      navigate('/recipes');
+      setMissingData(false);
+      navigate(-1);
+    } else {
+      //alert('missing data');
+      setMissingData(!missingData);
     }
   };
 
@@ -137,7 +143,7 @@ export const CreateRecipe = () => {
             onChange={handleChange}
             value={values.healthScore}
             name="healthScore"
-            type="number"
+            type="text"
             placeholder="Score"
           />
           <TextArea
@@ -207,6 +213,15 @@ export const CreateRecipe = () => {
           </ListItemChecked>
         </ContainerFormInputs>
         <Button type="submit">Create Recipe</Button>
+        <MessageAlert className={`span ${missingData ? 'alert' : ''}`}>
+          {missingData ? (
+            <>
+              Missing Data <ErrorIcon fontSize="small" />
+            </>
+          ) : (
+            <></>
+          )}
+        </MessageAlert>
       </Form>
     </ContainerCreateRecipe>
   );

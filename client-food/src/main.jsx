@@ -10,7 +10,7 @@ import axios from 'axios';
 import store from './store';
 
 axios.defaults.baseURL =
-  import.meta.env.VITE_APP_API_KEY || 'http://localhost:3001';
+  import.meta.env.VITE_APP_API_KEY || 'http://localhost:8080';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

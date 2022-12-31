@@ -9,6 +9,7 @@ import {
   ORDER_BY_HEALTH_SCORE,
   FILTERED_TYPE_OF_DIET,
   SET_CURRENT_PAGE_RECIPES,
+  SET_PAGE_ACTIVE,
 } from './actionsTypes';
 
 export const getRecipes = () => {
@@ -75,4 +76,9 @@ export const setRecipesPerPage = (currentPage) => {
       await dispatch({ type: SET_RECIPES_LOADING, payload: false });
     }
   };
+};
+
+export const setNumberPageActive = (pageActive) => {
+  console.log('soy action creator', pageActive);
+  return { type: SET_PAGE_ACTIVE, payload: pageActive };
 };

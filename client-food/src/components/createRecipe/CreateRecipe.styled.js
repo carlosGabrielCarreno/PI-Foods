@@ -29,6 +29,7 @@ export const Form = styled.form`
   width: 70%;
   height: 100%;
   margin: 0 auto;
+  transition: all 2s ease;
   @media (min-width: 850px) {
     height: 100vh;
   }
@@ -60,6 +61,7 @@ export const Button = styled.button`
   color: #111110;
   max-width: 300px;
   margin: 0.5rem 0;
+
   :hover {
     background: linear-gradient(#f8b525, #ffd160);
     color: rgb(24 23 23 / 95%);
@@ -122,4 +124,19 @@ export const ContainerFormInputs = styled.div`
 export const ListItemChecked = styled.ul`
   margin: 1rem;
   position: relative;
+`;
+
+export const MessageAlert = styled.span`
+  &.alert {
+    max-width: 300px;
+    color: #fff;
+    font-size: 12px;
+    padding: 8px 4px;
+    border-radius: 5px;
+    background: red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 800;
+  }
 `;
